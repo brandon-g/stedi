@@ -56,8 +56,7 @@ import { SignupPage } from '../pages/signup/signup';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AngularFireAuth,
     AuthService,
-    AngularFirestore,
-    AngularFirestoreDocument
+    AngularFirestore
   ]
 })
 export class AppModule {}
