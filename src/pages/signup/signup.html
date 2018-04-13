@@ -1,0 +1,80 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Sign up</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content> 
+
+  <form (ngSubmit)="signup()" [formGroup]="form">
+    <ion-list inset>
+
+      <ion-item [ngClass]="{ invalid: fnameErrors.hasError('*', ['touched']) }">
+        <ion-input type="text" placeholder="First Name" formControlName="fname"></ion-input>
+      </ion-item>
+      
+      <div ngxErrors="fname" #fnameErrors="ngxErrors">
+        <div [ngxError]="['fname', 'required']" [when]="['touched']">It should be a valid First Name</div>
+      </div>
+
+     
+      <ion-item [ngClass]="{ invalid: lnameErrors.hasError('*', ['touched']) }">
+        <ion-input type="text" placeholder="Last Name" formControlName="lname"></ion-input>
+      </ion-item>
+      
+      <div ngxErrors="lname" #lnameErrors="ngxErrors">
+        <div [ngxError]="['lname', 'required']" [when]="['touched']">It should be a valid Last Name</div>
+      </div> 
+      
+      <ion-item [ngClass]="{ invalid: emailErrors.hasError('*', ['touched']) }">
+        <ion-input type="text" placeholder="Email" formControlName="email"></ion-input>
+      </ion-item>
+
+      <div ngxErrors="email" #emailErrors="ngxErrors">
+        <div [ngxError]="['email', 'required']" [when]="['touched']">It should be a valid email</div>
+      </div>
+ 
+
+       <ion-item [ngClass]="{ invalid: phoneErrors.hasError('*', ['touched']) }">
+        <ion-input type="text" placeholder="Phone" formControlName="phone"></ion-input>
+      </ion-item>
+      
+      <div ngxErrors="phone" #phoneErrors="ngxErrors">
+        <div [ngxError]="['phone', 'required']" [when]="['touched']">It should be a valid Phone</div>
+      </div>
+
+      <ion-item [ngClass]="{ invalid: stateErrors.hasError('*', ['touched']) }">
+        <ion-input type="text" placeholder="State" formControlName="state"></ion-input>
+      </ion-item>
+      
+      <div ngxErrors="state" #stateErrors="ngxErrors">
+        <div [ngxError]="['state', 'required']" [when]="['touched']">It should be a valid State</div>
+      </div>      
+
+      <ion-item [ngClass]="{ invalid: passwordErrors.hasError('*', ['touched']) }">
+        <ion-input type="password" placeholder="Password" formControlName="password"></ion-input>
+      </ion-item>
+
+      <div ngxErrors="password" #passwordErrors="ngxErrors">
+        <div [ngxError]="['minlength', 'required']" [when]="['touched']">It should be at least 6 characters</div>
+      </div>
+
+       <ion-item [ngClass]="{ invalid: cpasswordErrors.hasError('*', ['touched']) }">
+        <ion-input type="cpassword" placeholder="Confirm Password" formControlName="cpassword"></ion-input>
+      </ion-item>
+      
+      <div ngxErrors="cpassword" #cpasswordErrors="ngxErrors">
+        <div [ngxError]="['minlength', 'required']" [when]="['touched']">It should be at least 6 characters</div>
+      </div> 
+      
+
+
+    </ion-list>
+
+    <div padding-horizontal>
+      <div class="form-error">{{signupError}}</div>
+
+      <button ion-button full type="submit" [disabled]="!form.valid">Sign up</button>
+    </div>
+  </form>
+</ion-content>
