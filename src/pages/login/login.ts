@@ -5,6 +5,9 @@ import { NavController } from 'ionic-angular';
 import { HomePage } from './../home/home';
 import { AuthService } from '../../services/auth.service';
 import { SignupPage } from '../signup/signup';
+import { TabsPage } from './../tabs/tabs';
+ 
+import { RollPage } from './../roll/roll';
  
 
 /**
@@ -28,12 +31,12 @@ export class LoginPage {
       private auth: AuthService,
       fb: FormBuilder
 
-    ) {
+    ) { 
 
     this.loginForm = fb.group({
-      email: ['', Validators.compose([Validators.required, Validators.email])],
-      password: ['', Validators.compose([Validators.required, Validators.minLength(6)])]
-    });
+      email: ['themalkesh987@gmail.com', Validators.compose([Validators.required, Validators.email])],
+      password: ['123456', Validators.compose([Validators.required, Validators.minLength(6)])]
+    }); 
 
   }
 
@@ -52,19 +55,33 @@ export class LoginPage {
       email: data.email,
       password: data.password
     };
-    this.auth.signInWithEmail(credentials)
-      .then(
-        () => this.navCtrl.setRoot(HomePage),
-        error => this.loginError = error.message
-      );
+
+    this.auth.signInWithEmail(credentials).then((result)=>{
+       
+      this.auth.rolls.valueChanges().subscribe((roll) => { 
+        console.log(roll);
+        if (roll) {
+          this.navCtrl.setRoot(TabsPage);
+        } else {
+          this.navCtrl.setRoot(RollPage);
+        }
+      })
+       
+    }); 
+
+      // .then(
+      // () => this.navCtrl.setRoot(TabsPage),
+      //   error => this.loginError = error.message
+      // );
   }
   signup() {
     this.navCtrl.push(SignupPage);
+    return false;
   }
   loginWithGoogle() {
     this.auth.signInWithGoogle()
       .then(
-        () => this.navCtrl.setRoot(HomePage),
+      () => this.navCtrl.setRoot(TabsPage),
         error => console.log(error.message)
       );
   }

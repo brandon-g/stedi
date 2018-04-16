@@ -1,17 +1,82 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>Home</ion-title>
+    <ion-title>Home </ion-title>
+
+  <ion-buttons end>
+    <button ion-button icon-only (click)="presentRollPopover($event)">
+      <ion-icon name="settings"></ion-icon>
+    </button>
+  </ion-buttons>
+
   </ion-navbar>
+  
 </ion-header>
 
-<ion-content padding>
-  <h2>Welcome to Ionic!</h2>
-  <p>
-    This starter project comes with simple tabs-based layout for apps
-    that are going to primarily use a Tabbed UI.
-  </p>
-  <p>
-    Take a look at the <code>src/pages/</code> directory to add or change tabs,
-    update any existing page or create new pages.
-  </p>
+<ion-content  >
+  <div *ngIf="roll" >
+
+  
+  <div padding>
+    <ion-segment [(ngModel)]="rollTabs">
+
+      <ion-segment-button value="parent" *ngIf="roll.parent"  >
+        Parent
+      </ion-segment-button>
+
+      <ion-segment-button value="subteacher" *ngIf="roll.subteacher" >
+        Sub Teacher
+      </ion-segment-button>
+
+      <ion-segment-button value="teacher" *ngIf="roll.teacher">
+        Teacher
+      </ion-segment-button>
+
+    </ion-segment>
+  </div>
+
+  <div [ngSwitch]="rollTabs">
+    <ion-list *ngSwitchCase="'parent'">
+      <ion-item>
+        <ion-thumbnail item-start>
+          <img src="img/thumbnail-puppy-1.jpg">
+        </ion-thumbnail>
+        <h2>Ruby</h2>
+      </ion-item>
+      <ion-item>
+        <ion-thumbnail item-start>
+          <img src="img/thumbnail-puppy-1.jpg">
+        </ion-thumbnail>
+        <h2>Ruby</h2>
+      </ion-item>
+    </ion-list>
+    <ion-list *ngSwitchCase="'subteacher'">
+      <ion-item>
+        <ion-thumbnail item-start>
+          <img src="img/thumbnail-kitten-1.jpg">
+        </ion-thumbnail>
+        <h2>Luna</h2>
+      </ion-item>
+      <ion-item>
+        <ion-thumbnail item-start>
+          <img src="img/thumbnail-kitten-1.jpg">
+        </ion-thumbnail>
+        <h2>Luna</h2>
+      </ion-item>
+    </ion-list>
+    <ion-list *ngSwitchCase="'teacher'">
+      <ion-item>
+        <ion-thumbnail item-start>
+          <img src="img/thumbnail-kitten-1.jpg">
+        </ion-thumbnail>
+        <h2>Luna</h2>
+      </ion-item>
+      <ion-item>
+        <ion-thumbnail item-start>
+          <img src="img/thumbnail-kitten-1.jpg">
+        </ion-thumbnail>
+        <h2>Luna</h2>
+      </ion-item>
+    </ion-list>
+  </div>
+  </div>
 </ion-content>

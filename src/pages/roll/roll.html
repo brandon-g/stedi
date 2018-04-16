@@ -7,12 +7,42 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>roll</ion-title>
+    <ion-title> Choose Roll </ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
+<ion-content >
+
+  <form (ngSubmit)="updateroll()" [formGroup]="rollForm">
+    <ion-list inset>
+    
+      <ion-item>
+        <ion-label>Parent</ion-label>
+        <ion-toggle formControlName="parent" ></ion-toggle>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Sub Teacher</ion-label>
+        <ion-toggle formControlName="subteacher" ></ion-toggle>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Teacher</ion-label>
+        <ion-toggle formControlName="teacher" ></ion-toggle>
+      </ion-item>
+
+
+      <ion-list> 
+        <button ion-button icon-left block clear>
+          <ion-icon name="person-add"></ion-icon>
+          Update Rolls
+        </button>
+      </ion-list>
+    
+    </ion-list>
+  </form>
+  
 
 </ion-content>

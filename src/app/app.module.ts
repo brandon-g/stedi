@@ -14,13 +14,17 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { firebaseConfig } from '../config';
-import { AngularFirestore, AngularFirestoreDocument } from 'angularfire2/firestore';
+import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreModule } from 'angularfire2/firestore';
 
 import { LoginPage } from '../pages/login/login';
 
 import { AuthService } from '../services/auth.service';
 import { NgxErrorsModule } from '@ultimate/ngxerrors';
 import { SignupPage } from '../pages/signup/signup';
+
+import { IonicStorageModule } from '@ionic/storage';
+import { RollPage } from '../pages/roll/roll';
+
 
 
 
@@ -32,14 +36,17 @@ import { SignupPage } from '../pages/signup/signup';
     HomePage,
     TabsPage,
     LoginPage,
-    SignupPage,
+    SignupPage, 
+    RollPage
   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
     AngularFireModule.initializeApp(firebaseConfig.fire),
-    NgxErrorsModule
-  ],
+    NgxErrorsModule,
+    AngularFirestoreModule,
+    IonicStorageModule.forRoot()
+  ], 
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
@@ -48,15 +55,15 @@ import { SignupPage } from '../pages/signup/signup';
     HomePage,
     TabsPage,
     LoginPage,
-    SignupPage
+    SignupPage,
+    RollPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AngularFireAuth,
-    AuthService,
-    AngularFirestore
+    AuthService, 
   ]
 })
 export class AppModule {}

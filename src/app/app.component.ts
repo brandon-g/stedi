@@ -6,6 +6,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { TabsPage } from '../pages/tabs/tabs';
 import { LoginPage } from '../pages/login/login';
 import { AuthService } from '../services/auth.service';
+import { RollPage } from '../pages/roll/roll';
  
  
 
@@ -39,10 +40,22 @@ export class MyApp {
       .subscribe(
         user => {
           if (user) {
-            this.rootPage = TabsPage;
+            
+            if(this.auth.hasrolls()){
+
+              this.rootPage = TabsPage;
+ 
+            }else{
+
+              this.rootPage = RollPage;
+
+            }
+
+            
           } else {
             this.rootPage = LoginPage;
           }
+          console.log(user);
         },
         () => {
           this.rootPage = LoginPage;
