@@ -14,6 +14,7 @@ interface User {
     lname:string;
     phone:string;
     state:string;
+    schoolDistrict:string;
 }
   
 @Injectable()
@@ -45,6 +46,7 @@ export class AuthService {
             lname: credentials.lname || null,
             phone: credentials.phone || null,
             state: credentials.state || null, 
+            schoolDistrict: credentials.state || null, 
         }
         console.log(data);
         return userRef.set(data)

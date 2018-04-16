@@ -32,8 +32,10 @@ export class SignupPage {
       email: ['', Validators.compose([Validators.required, Validators.email])],
       phone: ['', Validators.compose([Validators.required])],
       state: ['', Validators.compose([Validators.required])],
+      schoolDistrict: ['', Validators.compose([])],
       password: ['', Validators.compose([Validators.required, Validators.minLength(6)])],
-      cpassword: ['', Validators.compose([Validators.required, Validators.minLength(6)])]
+      cpassword: ['', Validators.compose([Validators.required, Validators.minLength(6)])],
+      terms: ['', Validators.compose([Validators.required])] 
     });
   }   
 
@@ -49,7 +51,9 @@ export class SignupPage {
       email: data.email,
       phone: data.phone, 
       state: data.state,
-      password: data.password
+      schoolDistrict: data.schoolDistrict,
+      password: data.password,
+      terms: data.terms
     };
     this.auth.signUp(credentials).then(
       () => this.navCtrl.setRoot(TabsPage),

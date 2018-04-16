@@ -43,13 +43,75 @@
         <div [ngxError]="['phone', 'required']" [when]="['touched']">It should be a valid Phone</div>
       </div>
 
+
+      
+
+       
+
       <ion-item [ngClass]="{ invalid: stateErrors.hasError('*', ['touched']) }">
-        <ion-input type="text" placeholder="State" formControlName="state"></ion-input>
+        <ion-label>State</ion-label>
+        <ion-select formControlName="state">
+          <ion-option value="Alabama"> Alabama </ion-option>
+          <ion-option value="Alaska"> Alaska </ion-option>
+          <ion-option value="Arizona"> Arizona </ion-option>
+          <ion-option value="Arkansas"> Arkansas </ion-option>
+          <ion-option value="California"> California </ion-option>
+          <ion-option value="Colorado"> Colorado </ion-option>
+          <ion-option value="Connecticut"> Connecticut </ion-option>
+          <ion-option value="Delaware"> Delaware </ion-option>
+          <ion-option value="Florida"> Florida </ion-option>
+          <ion-option value="Georgia"> Georgia </ion-option>
+          <ion-option value="Hawaii"> Hawaii </ion-option>
+          <ion-option value="Idaho"> Idaho </ion-option>
+          <ion-option value="Illinois"> Illinois Indiana </ion-option>
+          <ion-option value="Iowa"> Iowa </ion-option>
+          <ion-option value="Kansas"> Kansas </ion-option>
+          <ion-option value="Kentucky"> Kentucky </ion-option>
+          <ion-option value="Louisiana"> Louisiana </ion-option>
+          <ion-option value="Maine"> Maine </ion-option>
+          <ion-option value="Maryland"> Maryland </ion-option>
+          <ion-option value="Massachusetts"> Massachusetts </ion-option>
+          <ion-option value="Michigan"> Michigan </ion-option>
+          <ion-option value="Minnesota"> Minnesota </ion-option>
+          <ion-option value="Mississippi"> Mississippi </ion-option>
+          <ion-option value="Missouri"> Missouri </ion-option>
+          <ion-option value="Montana"> Montana Nebraska </ion-option>
+          <ion-option value="Nevada"> Nevada </ion-option>
+          <ion-option value="New"> New Hampshire </ion-option>
+          <ion-option value="New"> New Jersey </ion-option>
+          <ion-option value="New"> New Mexico </ion-option>
+          <ion-option value="New"> New York </ion-option>
+          <ion-option value="North"> North Carolina </ion-option>
+          <ion-option value="North"> North Dakota </ion-option>
+          <ion-option value="Ohio"> Ohio </ion-option>
+          <ion-option value="Oklahoma"> Oklahoma </ion-option>
+          <ion-option value="Oregon"> Oregon </ion-option>
+          <ion-option value="Pennsylvania"> Pennsylvania Rhode Island </ion-option>
+          <ion-option value="South"> South Carolina </ion-option>
+          <ion-option value="South"> South Dakota </ion-option>
+          <ion-option value="Tennessee"> Tennessee </ion-option>
+          <ion-option value="Texas"> Texas </ion-option>
+          <ion-option value="Utah"> Utah </ion-option>
+          <ion-option value="Vermont"> Vermont </ion-option>
+          <ion-option value="Virginia"> Virginia </ion-option>
+          <ion-option value="Washington"> Washington </ion-option>
+          <ion-option value="West"> West Virginia </ion-option>
+          <ion-option value="Wisconsin"> Wisconsin </ion-option>
+          <ion-option value="Wyoming"> Wyoming</ion-option>
+        </ion-select>  
       </ion-item>
       
       <div ngxErrors="state" #stateErrors="ngxErrors">
         <div [ngxError]="['state', 'required']" [when]="['touched']">It should be a valid State</div>
       </div>      
+
+      <ion-item  >
+        <ion-input type="text" placeholder="School District (if applicable)" formControlName="schoolDistrict"></ion-input>
+      </ion-item>
+      
+      <!-- <div ngxErrors="schoolDistrict" #schoolDistrictErrors="ngxErrors">
+        <div [ngxError]="['schoolDistrict']" [when]="['touched']">It should be a valid schoolDistrict</div>
+      </div> -->
 
       <ion-item [ngClass]="{ invalid: passwordErrors.hasError('*', ['touched']) }">
         <ion-input type="password" placeholder="Password" formControlName="password"></ion-input>
@@ -66,7 +128,23 @@
       <div ngxErrors="cpassword" #cpasswordErrors="ngxErrors">
         <div [ngxError]="['minlength', 'required']" [when]="['touched']">It should be at least 6 characters</div>
       </div> 
+
+      <ion-item class="terms_container" >
+        <ion-label>By creating an account you agree to STEDI's  Terms of Use </ion-label>
+        <ion-checkbox formControlName="terms"></ion-checkbox>
+      </ion-item>
+      <ion-item class="terms_container">
+        <p text-center >
+          <a href="https://stedi.org/terms-conditions/" target="_blank"> Terms of Use </a>
+        </p>
+      </ion-item>
+
+      <div ngxErrors="terms" #termsErrors="ngxErrors">
+        <div [ngxError]="['required']" [when]="['touched']">Please Accept Terms.</div>
+      </div>
+
       
+
 
 
     </ion-list>
