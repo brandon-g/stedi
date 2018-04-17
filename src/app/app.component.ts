@@ -14,7 +14,7 @@ import { RollPage } from '../pages/roll/roll';
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage: any = LoginPage; 
+  rootPage: any ; 
 
   constructor(
       private platform: Platform, 
@@ -23,35 +23,36 @@ export class MyApp {
       private auth: AuthService
   ) {
     
+   // console.log("called");
 
-    
+   // console.log(this.auth.authenticated);
 
-  }
+    if (this.auth.authenticated == true){
+      this.rootPage = TabsPage;
+    }
 
-  initializeApp() {
-    this.platform.ready().then(() => {
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
-      this.statusBar.styleDefault();
-      this.splashScreen.hide();
-    });
-
+   // console.log(this.auth.afAuth.auth.currentUser);
     this.auth.afAuth.authState
       .subscribe(
         user => {
+
+          
           if (user) {
-            
-            if(this.auth.hasrolls()){
+
+            this.auth.setUid(user.uid);
+            this.auth.getrolls();
+
+            if (this.auth.rolls) {
 
               this.rootPage = TabsPage;
- 
-            }else{
+
+            } else {
 
               this.rootPage = RollPage;
 
             }
 
-            
+
           } else {
             this.rootPage = LoginPage;
           }
@@ -61,6 +62,17 @@ export class MyApp {
           this.rootPage = LoginPage;
         }
       );
+
+  }
+
+  initializeApp() {
+    this.platform.ready().then(() => {
+      // Okay, so the platform is ready and our plugins are available.
+      // Here you can do any higher level native things you might need.
+      this.statusBar.styleDefault();
+      this.splashScreen.hide();
+
+    });
 
   }
 }

@@ -1,18 +1,25 @@
-<!--
-  Generated template for the ChatPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
-
   <ion-navbar>
-    <ion-title>chat</ion-title>
+    <ion-title>Chat </ion-title>
+
+    <ion-buttons end>
+      <button ion-button icon-only (click)="presentRollPopover($event)">
+        <ion-icon name="settings"></ion-icon>
+      </button>
+    </ion-buttons>
+
   </ion-navbar>
 
 </ion-header>
 
+<ion-content>
 
-<ion-content padding>
+  <ion-tabs tabsPlacement="top" tabsHighlight="true" *ngIf="roll" >
+    <ion-tab tabTitle="Parent" [root]="chattab1Root" [show]="roll.parent"   ></ion-tab>
+    <ion-tab tabTitle="Subteacher" [root]="chattab2Root" [show]="roll.subteacher"  ></ion-tab>
+    <ion-tab tabTitle="Teacher" [root]="chattab3Root" [show]="roll.teacher"   ></ion-tab>
+  </ion-tabs>
 
+
+ 
 </ion-content>

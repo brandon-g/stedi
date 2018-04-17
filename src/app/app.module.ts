@@ -15,6 +15,7 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { firebaseConfig } from '../config';
 import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreModule } from 'angularfire2/firestore';
+import { AngularFireDatabase } from 'angularfire2/database';
 
 import { LoginPage } from '../pages/login/login';
 
@@ -24,6 +25,12 @@ import { SignupPage } from '../pages/signup/signup';
 
 import { IonicStorageModule } from '@ionic/storage';
 import { RollPage } from '../pages/roll/roll';
+import { MorePage } from '../pages/more/more';
+import { ChatPage } from '../pages/chat/chat';
+import { ChatparentPage } from '../pages/chatparent/chatparent';
+import { ChatsubteacherPage } from '../pages/chatsubteacher/chatsubteacher';
+import { ChatteacherPage } from '../pages/chatteacher/chatteacher';
+
 
 
 
@@ -37,7 +44,12 @@ import { RollPage } from '../pages/roll/roll';
     TabsPage,
     LoginPage,
     SignupPage, 
-    RollPage
+    RollPage,
+    MorePage,
+    ChatPage,
+    ChatparentPage,
+    ChatsubteacherPage,
+    ChatteacherPage
   ],
   imports: [
     BrowserModule,
@@ -56,7 +68,12 @@ import { RollPage } from '../pages/roll/roll';
     TabsPage,
     LoginPage,
     SignupPage,
-    RollPage
+    RollPage,
+    MorePage,
+    ChatPage,
+    ChatparentPage,
+    ChatsubteacherPage,
+    ChatteacherPage
   ],
   providers: [
     StatusBar,
@@ -64,6 +81,8 @@ import { RollPage } from '../pages/roll/roll';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AngularFireAuth,
     AuthService, 
+    AngularFireDatabase
+
   ]
 })
 export class AppModule {}

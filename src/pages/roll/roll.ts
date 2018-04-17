@@ -3,6 +3,8 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 import { AuthService } from '../../services/auth.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { TabsPage } from '../tabs/tabs';
+
 
 /**
  * Generated class for the RollPage page.
@@ -37,9 +39,9 @@ export class RollPage {
   }
   setRolls(){
     this.rollForm = this.fb.group({
-      parent: [this.roll.parent],
-      subteacher: [this.roll.subteacher],
-      teacher: [this.roll.teacher]
+      parent: [this.roll ? this.roll.parent : null],
+      subteacher: [this.roll ? this.roll.subteacher : null],
+      teacher: [this.roll ? this.roll.teacher : null]
     });
   }
   ionViewDidLoad() {
@@ -48,9 +50,10 @@ export class RollPage {
 
   updateroll(){
     let data = this.rollForm.value;
-    this.auth.updaterolls(data).then((data)=>{
-      console.log(data); 
-    })
+    this.auth.updaterolls(data);
+    if(this.navParams.get('setRootPage')==true){
+      this.navCtrl.setRoot(TabsPage);  
+    }
     return false;
   }
 

@@ -14,14 +14,27 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 export class HomePage {
   roll: any; 
   rolls:[any];
-  constructor(public navCtrl: NavController, public popoverCtrl: PopoverController, private auth: AuthService, private fb: FormBuilder) {
+  
 
+  constructor(
+    public navCtrl: NavController, 
+    public popoverCtrl: PopoverController, 
+    private auth: AuthService, 
+    private fb: FormBuilder) {
+
+      
+    this.auth.getrolls();
+    
+    console.log(this.auth.rolls);
+    
     this.auth.rolls.valueChanges().subscribe(data => {
       this.roll = data;
       console.log(this.roll);
-      //this.setRolls();
     });
 
+  }
+  initializeApp() {
+    
   }
   setRolls() {
      

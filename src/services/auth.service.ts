@@ -5,6 +5,7 @@ import AuthProvider = firebase.auth.AuthProvider;
 import { AngularFirestore, AngularFirestoreDocument } from 'angularfire2/firestore';
 import { Storage } from '@ionic/storage';
 
+
  
 
 
@@ -27,26 +28,36 @@ interface Roll{
   
 @Injectable()
 export class AuthService {
-    private user: firebase.User;
-    private uid : string;
+    public user: firebase.User = null;
+    public uid : string;
     public  rolls: AngularFirestoreDocument<Roll>;
+    public userprofile: AngularFirestoreDocument<User>;
     constructor(
-            public afAuth: AngularFireAuth,
-            private afs: AngularFirestore, 
-            private storage: Storage
+        public afAuth: AngularFireAuth,
+        public afs: AngularFirestore, 
+        public storage: Storage,
+             
         ) {
         
-        //this.setUserFromSession();    
+         
 
         afAuth.authState.subscribe(user => {
             this.user = user;
         });
-
-        this.storage.get('uid').then((uid) => {
-            this.uid = uid;
-            this.rolls = this.afs.doc(`rolls/${uid}`);   
-        });    
-        
+   
+    }
+    setUid(uid){
+        this.storage.set('uid',uid);
+        this.uid = uid;
+    }
+    getUid(){
+        if (this.authenticated == true) {
+            return this.afAuth.auth.currentUser.uid;
+        } else {
+            return this.storage.get('uid').then((uid) => {
+                return uid;
+            });
+        }  
     }
     get authenticated(): boolean {
         return this.user !== null;
@@ -65,12 +76,27 @@ export class AuthService {
         return rollRef.set(data1)
     }
     hasrolls(){
-        this.storage.get('uid').then((uid) => {
-            
-            return this.rolls.valueChanges();
-        });
-        return false;
+        let uid = this.getUid();
+        this.rolls = this.afs.doc(`rolls/${uid}`);
+        return this.rolls.valueChanges();
     }
+
+    getrolls(){
+        let uid = this.getUid();
+        this.rolls = this.afs.doc(`rolls/${uid}`);
+    }
+
+    hasprofile() {
+        let uid = this.getUid();
+        this.userprofile = this.afs.doc(`users/${uid}`);
+        return this.userprofile.valueChanges();
+    }
+
+    getprofile() {
+        let uid = this.getUid();
+        this.userprofile = this.afs.doc(`users/${uid}`);
+    }
+
     setUserDoc(user,credentials){
         const userRef: AngularFirestoreDocument<User> = this.afs.doc(`users/${user.uid}`);
         const data: User = {
@@ -89,8 +115,10 @@ export class AuthService {
         console.log('Sign in with email');
         return this.afAuth.auth.signInWithEmailAndPassword(credentials.email,credentials.password)
             .then(user=>{
-                //console.log(result);
+                //console.log(user);
                 this.storeUserLogin(user);
+                 
+                //this.afAuth.auth.signInWithCustomToken(user.refreshToken);
                 
             });
     }
@@ -101,8 +129,11 @@ export class AuthService {
         });
     }
     signOut(): Promise<void> {
+        console.log("logout1");
         return this.afAuth.auth.signOut().then(result=>{
+            console.log("logout2");
             this.removeUserLogin();
+            console.log("logout3");
         });
     }
     signInWithGoogle() {
@@ -135,7 +166,9 @@ export class AuthService {
         this.storage.set('uid', user.uid);
         //this.storage.set('user', user);
         this.uid = user.uid;
-        
+        this.setUid(user.uid); 
+        this.getrolls();
+        this.getprofile();
     }
     private oauthSignIn(provider: AuthProvider) {
         if (!(<any>window).cordova) {

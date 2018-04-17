@@ -57,15 +57,18 @@ export class LoginPage {
     };
 
     this.auth.signInWithEmail(credentials).then((result)=>{
-       
-      this.auth.rolls.valueChanges().subscribe((roll) => { 
-        console.log(roll);
-        if (roll) {
-          this.navCtrl.setRoot(TabsPage);
-        } else {
-          this.navCtrl.setRoot(RollPage);
-        }
-      })
+      // this.auth.getrolls(); 
+      // this.auth.rolls.valueChanges().subscribe((roll) => { 
+      //   console.log(roll);
+      //   if (roll) {
+      //     this.navCtrl.setRoot(TabsPage);
+      //   } else {
+      //     this.navCtrl.setRoot(RollPage);
+      //     this.navCtrl.setRoot(RollPage, {
+      //       setRootPage: true
+      //     })
+      //   }
+      // })
        
     }); 
 
