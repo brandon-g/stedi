@@ -96,7 +96,21 @@ export class AuthService {
         let uid = this.getUid();
         this.userprofile = this.afs.doc(`users/${uid}`);
     }
-
+    setblankuserprofile(){
+        let user = this.afAuth.auth.currentUser;
+        const userRef: AngularFirestoreDocument<User> = this.afs.doc(`users/${user.uid}`);
+        const data: User = {
+            uid: user.uid,
+            email: user.email || null,
+            fname:  null,
+            lname:  null,
+            phone:  null,
+            state:  null,
+            schoolDistrict:  null,
+        }
+        console.log(data);
+        return userRef.set(data)
+    }
     setUserDoc(user,credentials){
         const userRef: AngularFirestoreDocument<User> = this.afs.doc(`users/${user.uid}`);
         const data: User = {

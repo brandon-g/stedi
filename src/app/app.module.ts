@@ -30,8 +30,7 @@ import { ChatPage } from '../pages/chat/chat';
 import { ChatparentPage } from '../pages/chatparent/chatparent';
 import { ChatsubteacherPage } from '../pages/chatsubteacher/chatsubteacher';
 import { ChatteacherPage } from '../pages/chatteacher/chatteacher';
-
-
+import { ProfilePage } from '../pages/profile/profile';
 
 
 
@@ -49,7 +48,8 @@ import { ChatteacherPage } from '../pages/chatteacher/chatteacher';
     ChatPage,
     ChatparentPage,
     ChatsubteacherPage,
-    ChatteacherPage
+    ChatteacherPage,
+    ProfilePage
   ],
   imports: [
     BrowserModule,
@@ -73,7 +73,8 @@ import { ChatteacherPage } from '../pages/chatteacher/chatteacher';
     ChatPage,
     ChatparentPage,
     ChatsubteacherPage,
-    ChatteacherPage
+    ChatteacherPage,
+    ProfilePage
   ],
   providers: [
     StatusBar,

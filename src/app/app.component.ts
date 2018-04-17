@@ -41,6 +41,7 @@ export class MyApp {
 
             this.auth.setUid(user.uid);
             this.auth.getrolls();
+            this.auth.getprofile();
 
             if (this.auth.rolls) {
 

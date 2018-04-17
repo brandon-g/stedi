@@ -7,12 +7,135 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>profile</ion-title>
+    <ion-title>Profile</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
-
+<ion-content   >
+ 
+  <ion-item-group *ngIf=(userProfile) >
+    <input type="file" #fileInput style="visibility: hidden; height: 0px" name="files[]" (change)="processWebImage($event)"
+    />
+    <div class="profile-image-wrapper" (click)="presentActionSheet()">
+      <div class="profile-image-placeholder" *ngIf="!ImageUrl">
+        <ion-icon name="add"></ion-icon>
+        <div>
+          Select Image
+        </div>
+      </div>
+      <div class="profile-image" [style.backgroundImage]="getProfileImageStyle()" *ngIf="ImageUrl"></div>
+    </div>
+  </ion-item-group>
+  <form *ngIf=(userProfile)  (ngSubmit)="signup()" [formGroup]="form">
+    <ion-list inset>
+  
+      <ion-item [ngClass]="{ invalid: fnameErrors.hasError('*', ['touched']) }">
+        <ion-input type="text" placeholder="First Name" formControlName="fname"></ion-input>
+      </ion-item>
+  
+      <div ngxErrors="fname" #fnameErrors="ngxErrors">
+        <div [ngxError]="['fname', 'required']" [when]="['touched']">It should be a valid First Name</div>
+      </div>
+  
+      <ion-item [ngClass]="{ invalid: lnameErrors.hasError('*', ['touched']) }">
+        <ion-input type="text" placeholder="Last Name" formControlName="lname"></ion-input>
+      </ion-item>
+  
+      <div ngxErrors="lname" #lnameErrors="ngxErrors">
+        <div [ngxError]="['lname', 'required']" [when]="['touched']">It should be a valid Last Name</div>
+      </div>
+  
+      <ion-item [ngClass]="{ invalid: emailErrors.hasError('*', ['touched']) }">
+        <ion-input type="text" placeholder="Email" formControlName="email"></ion-input>
+      </ion-item>
+  
+      <div ngxErrors="email" #emailErrors="ngxErrors">
+        <div [ngxError]="['email', 'required']" [when]="['touched']">It should be a valid email</div>
+      </div>
+  
+      <ion-item [ngClass]="{ invalid: phoneErrors.hasError('*', ['touched']) }">
+        <ion-input type="text" placeholder="Phone" formControlName="phone"></ion-input>
+      </ion-item>
+  
+      <div ngxErrors="phone" #phoneErrors="ngxErrors">
+        <div [ngxError]="['phone', 'required']" [when]="['touched']">It should be a valid Phone</div>
+      </div>
+  
+      <ion-item [ngClass]="{ invalid: stateErrors.hasError('*', ['touched']) }">
+        <ion-label>State</ion-label>
+        <ion-select formControlName="state">
+          <ion-option value="Alabama"> Alabama </ion-option>
+          <ion-option value="Alaska"> Alaska </ion-option>
+          <ion-option value="Arizona"> Arizona </ion-option>
+          <ion-option value="Arkansas"> Arkansas </ion-option>
+          <ion-option value="California"> California </ion-option>
+          <ion-option value="Colorado"> Colorado </ion-option>
+          <ion-option value="Connecticut"> Connecticut </ion-option>
+          <ion-option value="Delaware"> Delaware </ion-option>
+          <ion-option value="Florida"> Florida </ion-option>
+          <ion-option value="Georgia"> Georgia </ion-option>
+          <ion-option value="Hawaii"> Hawaii </ion-option>
+          <ion-option value="Idaho"> Idaho </ion-option>
+          <ion-option value="Illinois"> Illinois Indiana </ion-option>
+          <ion-option value="Iowa"> Iowa </ion-option>
+          <ion-option value="Kansas"> Kansas </ion-option>
+          <ion-option value="Kentucky"> Kentucky </ion-option>
+          <ion-option value="Louisiana"> Louisiana </ion-option>
+          <ion-option value="Maine"> Maine </ion-option>
+          <ion-option value="Maryland"> Maryland </ion-option>
+          <ion-option value="Massachusetts"> Massachusetts </ion-option>
+          <ion-option value="Michigan"> Michigan </ion-option>
+          <ion-option value="Minnesota"> Minnesota </ion-option>
+          <ion-option value="Mississippi"> Mississippi </ion-option>
+          <ion-option value="Missouri"> Missouri </ion-option>
+          <ion-option value="Montana"> Montana Nebraska </ion-option>
+          <ion-option value="Nevada"> Nevada </ion-option>
+          <ion-option value="New"> New Hampshire </ion-option>
+          <ion-option value="New"> New Jersey </ion-option>
+          <ion-option value="New"> New Mexico </ion-option>
+          <ion-option value="New"> New York </ion-option>
+          <ion-option value="North"> North Carolina </ion-option>
+          <ion-option value="North"> North Dakota </ion-option>
+          <ion-option value="Ohio"> Ohio </ion-option>
+          <ion-option value="Oklahoma"> Oklahoma </ion-option>
+          <ion-option value="Oregon"> Oregon </ion-option>
+          <ion-option value="Pennsylvania"> Pennsylvania Rhode Island </ion-option>
+          <ion-option value="South"> South Carolina </ion-option>
+          <ion-option value="South"> South Dakota </ion-option>
+          <ion-option value="Tennessee"> Tennessee </ion-option>
+          <ion-option value="Texas"> Texas </ion-option>
+          <ion-option value="Utah"> Utah </ion-option>
+          <ion-option value="Vermont"> Vermont </ion-option>
+          <ion-option value="Virginia"> Virginia </ion-option>
+          <ion-option value="Washington"> Washington </ion-option>
+          <ion-option value="West"> West Virginia </ion-option>
+          <ion-option value="Wisconsin"> Wisconsin </ion-option>
+          <ion-option value="Wyoming"> Wyoming</ion-option>
+        </ion-select>
+      </ion-item>
+  
+      <div ngxErrors="state" #stateErrors="ngxErrors">
+        <div [ngxError]="['state', 'required']" [when]="['touched']">It should be a valid State</div>
+      </div>
+  
+      <ion-item>
+        <ion-input type="text" placeholder="School District (if applicable)" formControlName="schoolDistrict"></ion-input>
+      </ion-item>
+  
+      <!-- <div ngxErrors="schoolDistrict" #schoolDistrictErrors="ngxErrors">
+          <div [ngxError]="['schoolDistrict']" [when]="['touched']">It should be a valid schoolDistrict</div>
+        </div> -->
+  
+    
+  
+    </ion-list>
+  
+    <div padding-horizontal>
+      <div class="form-error">{{signupError}}</div>
+  
+      <button ion-button full type="submit" [disabled]="!form.valid">Update</button>
+    </div>
+  </form>
 </ion-content>

@@ -16,15 +16,19 @@
 <ion-content >
 
 <ion-list *ngIf="userProfile" >
-
   <ion-item>
     <ion-avatar item-start>
       <img src="img/my-avatar.png">
     </ion-avatar>
     {{userProfile.fname}} {{userProfile.lname}}
-    <button ion-button outline item-end>Edit Profile</button>
+    <button ion-button outline item-end (click)="editprofile()" >Edit Profile</button>
   </ion-item>
-   
+ </ion-list>
+ <ion-list> 
+  <button ion-item icon-left block clear (click)="getuserprofile()">
+    <ion-icon name="exit"></ion-icon>
+    get Profile
+  </button>
   <button ion-item icon-left block clear (click)="logout()">
     <ion-icon name="exit"></ion-icon>
     Log Out
