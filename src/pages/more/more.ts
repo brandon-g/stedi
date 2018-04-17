@@ -16,11 +16,19 @@ import { AuthService } from '../../services/auth.service';
 })
 export class MorePage {
 
+  userProfile: any;
   constructor(
       public navCtrl: NavController, 
       public navParams: NavParams,
       private auth: AuthService,
     ) {
+
+    this.auth.getprofile();
+    this.auth.userprofile.valueChanges().subscribe(data => {
+      if (data) {
+        this.userProfile = data;
+      }
+    });
   }
 
   ionViewDidLoad() {

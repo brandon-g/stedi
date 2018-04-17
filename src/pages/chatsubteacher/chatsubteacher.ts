@@ -20,6 +20,9 @@ export class ChatsubteacherPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ChatsubteacherPage');
+    
   }
+  
+  
 
 }

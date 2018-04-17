@@ -15,8 +15,17 @@
 
 <ion-content >
 
-<ion-list>
-  <button ion-button icon-left block clear (click)="logout()">
+<ion-list *ngIf="userProfile" >
+
+  <ion-item>
+    <ion-avatar item-start>
+      <img src="img/my-avatar.png">
+    </ion-avatar>
+    {{userProfile.fname}} {{userProfile.lname}}
+    <button ion-button outline item-end>Edit Profile</button>
+  </ion-item>
+   
+  <button ion-item icon-left block clear (click)="logout()">
     <ion-icon name="exit"></ion-icon>
     Log Out
   </button>
